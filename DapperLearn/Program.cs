@@ -26,6 +26,17 @@
                 var user = db.Query<User>("SELECT * FROM Users Where Id = 1").FirstOrDefault();
                 Console.WriteLine(user);
             }
+
+            Console.WriteLine(new string('-', 80));
+
+            Console.WriteLine("SimpleStoreProcedure");
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var user =
+                    db.Query<User>("GetUserById", new {userId = 2}, commandType: CommandType.StoredProcedure).First();
+                Console.WriteLine(user);
+            }
         }
     }
 
